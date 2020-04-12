@@ -31,46 +31,48 @@ public class MovieManagementSystem {
 		
 		while ( option != 5 ) {
 			
-			System.out.println();
 			System.out.println("Movie Management System");
 			System.out.println("1. Add New Movie and Save");
 			System.out.println("2. Generate List of Movies Released in a Year");
 			System.out.println("3. Generate List of Random Movies");
 			System.out.println("4. Delete Movie by Id");
 			System.out.println("5. Exit");
-			System.out.println();
 			System.out.print("Enter an option: ");
 			option = input.nextInt();
 			System.out.println();
 			
 			switch(option) {
 				case 1: 
+					System.out.println("Adding a new movie");
 					addMovie();
 					break;
 				case 2: 
+					System.out.println("List of Movies released in a Year");
 					System.out.print("Enter in year: ");
 					generateMovieInYear(input.nextInt());
 					break;
 				case 3: 
+					System.out.println("List of Random movies");
 					System.out.print("Enter number of movies: ");
 					generateRandomMovie(input.nextInt());
 					break;
 				case 4:
+					System.out.println("Deleting a movie");
 					System.out.print("Enter movie Id: ");
 					deleteMovie(input.nextInt());
+					break;
 				case 5:
 					try {
 						conn.close();
+						System.out.println("Program closed.");
 					} catch (SQLException e) {
 						System.out.println("ERROR: " + e.getMessage());
 					}
 					break;
 				default: 
-					System.out.print("Invalid option!");
+					System.out.print("Invalid option! Please select option from 1 to 5");
 					break;
 			}
-			
-			System.out.println();
 		}
 		
 		input.close();
@@ -90,13 +92,14 @@ public class MovieManagementSystem {
 		System.out.print("Enter year: ");
 		int year = input.nextInt();
 		input.nextLine();
-		System.out.println("Saving movies...");
+		System.out.println("Adding movies...");
 		
 		try {
 			Statement stmt = conn.createStatement();
 			int rows = stmt.executeUpdate("INSERT INTO movies (duration, title, year) VALUES ('"+duration+"','"+title+"','"+year+"')");
 			System.out.println( rows + " movie(s) added.");
 			stmt.close();
+			System.out.println();
 		} catch (SQLException e) {
 			System.out.println("ERROR: " + e.getMessage());
 		}
@@ -128,6 +131,7 @@ public class MovieManagementSystem {
 			result.close();
 			
 			stmt.close();
+			System.out.println();
 		}
 		catch(SQLException e) {
 			System.out.println("ERROR: " + e.getMessage());
@@ -151,9 +155,11 @@ public class MovieManagementSystem {
 				System.out.printf("%n%-10d %-10d %s", result.getInt("duration"), result.getInt("year"), result.getString("title") );
 				durationTotal += result.getInt("duration");
 			}
+			System.out.println();
 			System.out.println("Total duration: " + durationTotal + " minutes");
 			result.close();
 			stmt.close();
+			System.out.println();
 		} catch(SQLException e) {
 			System.out.println("ERROR: " + e.getMessage());
 		}
@@ -165,6 +171,7 @@ public class MovieManagementSystem {
 			int rows = stmt.executeUpdate("DELETE FROM movies WHERE id = '" + movieId + "'");
 			System.out.println(rows + " movie(s) deleted.");
 			stmt.close();
+			System.out.println();
 		} catch (SQLException e) {
 			System.out.println("Error: " + e.getMessage());
 		}
