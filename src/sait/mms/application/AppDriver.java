@@ -1,6 +1,5 @@
 package sait.mms.application;
 
-import java.io.IOException;
 import sait.mms.managers.*;
 
 /**
@@ -10,7 +9,7 @@ import sait.mms.managers.*;
  */
 public class AppDriver {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
 		// Create a MovieManagementSystem instance
 		MovieManagementSystem mms = new MovieManagementSystem();
