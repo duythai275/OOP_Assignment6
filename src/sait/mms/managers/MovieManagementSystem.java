@@ -5,22 +5,25 @@ import java.util.*;
 import java.sql.*;
 
 /**
- * This program reads data from text file, store them into an array list of movie objects,
- * and add movie, generate movie list by released yearly and randomly
+ * This class has functions to connect movies database, query data by year or randomly, add and delete a record to movies database
  * 
  * @author Seulgi Kim, Thai Nguyen
- * @version January 17, 2020
+ * @version April 13, 2020
  */
 public class MovieManagementSystem {
 	
-	Scanner input = new Scanner(System.in); // this scanner variable is for entering
+	/**
+	 * this scanner variable is for entering
+	 */
+	Scanner input = new Scanner(System.in);
 	
+	/**
+	 * this variable is for connecting to database
+	 */
 	Connection conn;
 	
 	/**
-	 * displayMenu methods show options to add movie, generate movie list by released year or randomly
-	 * 
-	 * @throws IOException Thrown when the file could not be accessed
+	 * displayMenu methods show options : add/delete movie, get movies
 	 */
 	public void displayMenu() {
 		
@@ -82,8 +85,6 @@ public class MovieManagementSystem {
 
 	/**
 	 * addMovie method allows entering a new movie with its attributes
-	 * 
-	 * @return a Movie object in order to add it into movies ArrayList
 	 */
 	public void addMovie() {
 		try {
@@ -121,8 +122,6 @@ public class MovieManagementSystem {
 	
 	/**
 	 * generateMovieInYear method generates and displays all movies by a selected released year
-	 * 
-	 * @param year is the released year of Movies will be shown in list
 	 */
 	public void generateMovieInYear() {
 		System.out.print("Enter in year: ");
@@ -167,8 +166,6 @@ public class MovieManagementSystem {
 	
 	/**
 	 * generateRandomMovie method creates and displays the random movie list
-	 * 
-	 * @param numberOfMoives is how many movies should be displayed in list
 	 */
 	public void generateRandomMovie() {
 		System.out.print("Enter number of movies: ");
@@ -205,6 +202,9 @@ public class MovieManagementSystem {
 		}
 	}
 	
+	/**
+	 * deleteMovie method is used to delete a record in movies table by movieId
+	 */
 	public void deleteMovie() {
 		System.out.print("Enter movie Id: ");
 		try {
@@ -232,10 +232,7 @@ public class MovieManagementSystem {
 	}
 	
 	/**
-	 * loadMovie method reads each line in text file
-	 * , then add movies with their attributes into movies list
-	 * 
-	 * @throws IOException Thrown when the file could not be accessed
+	 * loadMovie method connects the program with database
 	 */
 	public void loadMovie() {
 		try {
@@ -245,6 +242,14 @@ public class MovieManagementSystem {
 		}
 	}
 	
+	/**
+	 * inputPositiveNumber method is used to validate the inputted number
+	 * , to be sure the inputted number is positive number
+	 * 
+	 * @param inputNumber is value that user enters
+	 * @return only a positive number
+	 * @throws NegativeNumberException will be thrown when the inputted value is negative
+	 */
 	public int inputPositiveNumber(int inputNumber) throws NegativeNumberException {
 		if ( inputNumber < 0 ) {
 			throw new NegativeNumberException();

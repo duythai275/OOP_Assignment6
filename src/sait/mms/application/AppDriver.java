@@ -4,8 +4,9 @@ import sait.mms.managers.*;
 
 /**
  * This program demonstrates the MovieManagementSystem class's displayMenu method
+ * 
  * @author Seulgi Kim, Thai Nguyen
- * @version  January 17, 2020
+ * @version April 13, 2020
  */
 public class AppDriver {
 
