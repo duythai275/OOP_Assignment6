@@ -15,20 +15,28 @@ public class MovieManagementSystem {
 	/**
 	 * this scanner variable is for entering
 	 */
-	Scanner input = new Scanner(System.in);
+	private Scanner input = new Scanner(System.in);
 	
 	/**
 	 * this variable is for connecting to database
 	 */
-	Connection conn;
+	private Connection conn;
+	
+	/**
+	 * This constructor will create connection to database once the Object initialized
+	 */
+	public MovieManagementSystem() {
+		try {
+			this.conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cprg251?user=cprg251&password=password");
+		} catch (SQLException e) {
+			System.out.println("ERROR: " + e.getMessage());
+		}
+	}
 	
 	/**
 	 * displayMenu methods show options : add/delete movie, get movies
 	 */
 	public void displayMenu() {
-		
-		// call this method to store all movies into the movies ArrayList
-		loadMovie();
 		
 		int option = 0;
 		
@@ -228,17 +236,6 @@ public class MovieManagementSystem {
 		catch (SQLException e) {
 			System.out.println("ERROR: " + e.getMessage());
 			System.out.println();
-		}
-	}
-	
-	/**
-	 * loadMovie method connects the program with database
-	 */
-	public void loadMovie() {
-		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cprg251?user=cprg251&password=password");
-		} catch (SQLException e) {
-			System.out.println("ERROR: " + e.getMessage());
 		}
 	}
 	
